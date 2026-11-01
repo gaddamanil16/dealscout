@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dealscout"
+version = "0.1.0"
+description = "Single-agent shopping deal finder powered by Google ADK, OpenRouter, and Lowvyn MCP."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "DealScout" }]
+dependencies = [
+  "google-adk[mcp]>=1.25.0",
+  "litellm>=1.84",
+  "python-dotenv>=1.0.0",
+  "pydantic>=2.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+]
+
+[project.scripts]
+dealscout = "scripts.run_query:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dealscout_agent", "scripts"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.uv]
+default-groups = ["dev"]
